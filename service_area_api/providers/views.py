@@ -1,4 +1,4 @@
-from rest_framework import  viewsets
+from rest_framework import viewsets, status
 from .models import Provider, ServiceArea
 from .serializers import ProviderSerializer, ServiceAreaSerializer
 from django.contrib.gis.geos import GEOSGeometry
@@ -32,4 +32,4 @@ class ServiceAreaView(viewsets.ModelViewSet):
 
             return Response(serializer.data)
         except:
-            return Response({"Error": "Make sure you set longitude & latitude correctly"})
+            return Response({"Error": "Make sure you set longitude & latitude correctly"}, status=status.HTTP_400_BAD_REQUEST)

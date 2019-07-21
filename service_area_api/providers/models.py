@@ -11,6 +11,9 @@ class Provider(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def get_summarized(self):
+        return '{} ({}) - {}'.format(self.name, self.email, self.currency)
+
     def __str__(self):
         return self.name
 
@@ -22,6 +25,9 @@ class ServiceArea(models.Model):
     polygon = PolygonField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_summarized(self):
+        return '{} ({}) - {}'.format(self.name, self.provider.name, self.price)
 
     def __str__(self):
         return self.name
