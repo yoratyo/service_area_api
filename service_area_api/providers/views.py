@@ -1,10 +1,11 @@
-from django.shortcuts import render
 from rest_framework import  viewsets
 from .models import Provider, ServiceArea
 from .serializers import ProviderSerializer, ServiceAreaSerializer
 from django.contrib.gis.geos import GEOSGeometry
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 class ProviderView(viewsets.ModelViewSet):
@@ -16,6 +17,8 @@ class ServiceAreaView(viewsets.ModelViewSet):
     queryset = ServiceArea.objects.all()
     serializer_class = ServiceAreaSerializer
 
+    # Cache requested url for each user for 1 hours
+    @method_decorator(cache_page(60*60))
     @action(methods=['get'], detail=False)
     def search(self, request):
         try:
