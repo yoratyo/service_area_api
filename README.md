@@ -3,7 +3,7 @@ Service Area API
 
 Requirement :
 
-pip install Django
+###pip install Django
 
 pip install djangorestframework
 
