@@ -21,6 +21,7 @@ class ServiceAreaView(viewsets.ModelViewSet):
     @method_decorator(cache_page(60*60))
     @action(methods=['get'], detail=False)
     def search(self, request):
+        # Search included service area by long/lat pair
         try:
             longitude = request.query_params.get('longitude')
             latitude = request.query_params.get('latitude')
